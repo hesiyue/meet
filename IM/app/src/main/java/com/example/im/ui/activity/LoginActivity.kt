@@ -1,11 +1,8 @@
-package com.example.im
+package com.example.im.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.view.KeyEvent
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
-import com.example.im.BaseActivity
 import com.example.im.R
 import com.example.im.contract.LoginContract
 import com.example.im.presenter.LoginPresenter

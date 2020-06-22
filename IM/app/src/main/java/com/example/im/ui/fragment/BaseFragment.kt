@@ -1,10 +1,13 @@
-package com.example.im
+package com.example.im.ui.fragment
+
+
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+
 
 abstract class BaseFragment : Fragment() {
 
@@ -16,9 +19,8 @@ abstract class BaseFragment : Fragment() {
         return inflater.inflate(getLayoutResId(),null)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        init()
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = init()
+
 
     open fun init(){
 

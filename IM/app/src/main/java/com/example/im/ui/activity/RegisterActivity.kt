@@ -1,9 +1,9 @@
-package com.example.im
+package com.example.im.ui.activity
 
+import com.example.im.R
 import com.example.im.contract.RegisterContract
 import com.example.im.presenter.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
-import org.jetbrains.anko.dimen
 import org.jetbrains.anko.toast
 
 
@@ -33,7 +33,8 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
 
     }
 
-    override fun getLayoutResId() :Int = R.layout.activity_register
+    override fun getLayoutResId() :Int =
+        R.layout.activity_register
 
     override fun onUserNameError() {
         userName.error = getString(R.string.user_name_error)
@@ -56,6 +57,7 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
 
     override fun onRegisterSuccess() {
         dismissProgress()
+        toast(R.string.register_success)
         finish()
 
     }
@@ -64,6 +66,11 @@ class RegisterActivity : BaseActivity(),RegisterContract.View {
         dismissProgress()
         toast(R.string.register_failed)
 
+    }
+
+    override fun onUserExist() {
+        dismissProgress()
+        toast(R.string.user_already_exist)
     }
 
 
