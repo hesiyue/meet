@@ -2,8 +2,10 @@ package com.example.im.widget
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import com.example.im.R
 import org.jetbrains.anko.sp
@@ -62,4 +64,50 @@ class SlideBar(context: Context?, attrs: AttributeSet? = null) : View(context, a
         fun onSectionChange(firstLetter: String)
         fun onSlideFinish()//滑动结束的回调
     }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when(event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                setBackgroundResource(R.drawable.bg_slide_bar)
+                //找到点击的字母
+                val index = getTouchIndex(event)
+
+                val firstLetter = SECTIONS[index]
+
+                onSectionChangeListener?.onSectionChange(firstLetter)
+
+            }
+            MotionEvent.ACTION_MOVE -> {
+                //找到点击的字母
+                val index = getTouchIndex(event)
+
+                val firstLetter = SECTIONS[index]
+                onSectionChangeListener?.onSectionChange(firstLetter)
+
+            }
+            MotionEvent.ACTION_UP -> {
+                setBackgroundColor(Color.TRANSPARENT)
+                onSectionChangeListener?.onSlideFinish()
+            }
+        }
+
+        return true
+    }
+
+    //获取到点击位置的字母的下标
+    private fun getTouchIndex(event: MotionEvent): Int {
+        var index = (event.y /sectionHeight).toInt()
+        //越界检查
+        if (index < 0){
+            index = 0
+        }else if (index >= SECTIONS.size) {
+            index = SECTIONS.size-1
+        }
+        return index
+
+    }
+
+
+
+
 }

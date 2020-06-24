@@ -8,6 +8,10 @@ import com.hyphenate.chat.EMOptions
 
 class IMApplication : Application() {
 
+    companion object {
+        lateinit var instance : IMApplication
+    }
+
     override fun onCreate() {
         super.onCreate()
 
